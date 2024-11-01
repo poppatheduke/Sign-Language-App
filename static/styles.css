@@ -1,0 +1,308 @@
+static/styles.css
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.6rem;
+  background: rgb(244, 244, 244);
+  font-family: "Poppins", sans-serif;
+}
+.navbar {
+  padding: 2rem 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+nav img {
+  width: 8rem;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-around;
+  gap: 3rem;
+  list-style: none;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #0056b3;
+  cursor: pointer;
+}
+.navbar ul li a:hover {
+  color: #0056;
+}
+
+.cover {
+  background-color: #fff;
+  border-radius: 5px;
+  border: #333 1px solid;
+  padding: 10rem;
+}
+
+.footer {
+  background: #333;
+  padding: 7rem 0 5rem;
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
+  align-items: center;
+}
+.footer ul {
+  align-self: stretch;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footer-img {
+  width: 20rem;
+}
+.footer-img img {
+  width: 100%;
+}
+.copyright {
+  text-align: center;
+  color: white;
+}
+.footer ul li a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.footer ul li a:hover {
+  color: green;
+  transform: rotateX("angle");
+}
+
+.detectBody {
+  background-image: url(images/background.jpg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem 0;
+}
+#camera {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  align-items: center;
+  gap: 2rem;
+  width: fit-content;
+}
+#camera button {
+  align-self: stretch;
+}
+#camera video {
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+nav {
+  background-color: #fff;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  font-family: cursive;
+}
+
+.navbar h1 {
+  font-family: cursive;
+  text-align: center;
+}
+
+nav h1 {
+  margin: 0 auto 0 0;
+}
+
+h1 {
+  color: #0056b3;
+  padding-bottom: 2rem;
+}
+
+.home {
+  padding: 10rem;
+  display: flex;
+  gap: 10rem;
+}
+.home img {
+  width: 100%;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.home h2 {
+  padding-bottom: 2rem;
+}
+.home p {
+  line-height: 1.5;
+  padding-bottom: 2rem;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.intro {
+  width: 100%;
+  height: 90vh;
+  background-image: url(./images/speakers.jpeg);
+  background-position: center;
+  background-size: cover;
+}
+
+.detectBody h1 {
+  text-align: center;
+}
+div form {
+  padding: 8rem 0 5rem 0;
+}
+form {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.5em;
+  padding-left: 2rem;
+  text-align: center;
+  color: #007bff;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+#imagePreview {
+  width: 20rem;
+  transition: 0.2s;
+}
+#imagePreview:hover {
+  padding: 1rem;
+  width: 25rem;
+  border: 2px solid #0056b3;
+  border-radius: 0.2rem;
+}
+.preview-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.preview-section p {
+  padding-top: 5rem;
+  margin: auto 0;
+}
+button {
+  padding: 1rem 1.5rem;
+  background-color: #007bff;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  border-radius: 3px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  margin-top: 5rem;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#uploadImage {
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  display: inline-block;
+  border: 1px dashed #0056b3;
+  cursor: pointer;
+}
+
+#uploadImage p {
+  text-align: center;
+  padding: 0 2rem;
+}
+#uploadImage:hover {
+  border: 1px dashed darkred;
+}
+#uploadImage:hover p {
+  color: orangered;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+    gap: 1rem;
+    padding-left: 2rem;
+  }
+
+  .home {
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .cover {
+    padding: 5rem 1rem;
+  }
+
+  .footer ul {
+    flex-direction: column;
+    padding-left: 1rem;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navbar h1 {
+    text-align: center;
+    margin: 0;
+  }
+
+  .detectBody {
+    padding: 2rem 1rem;
+  }
+
+  #camera video {
+    width: 100%;
+  }
+
+  form {
+    padding: 2rem 0;
+  }
+
+  button {
+    font-size: 1.4rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  #uploadImage p {
+    font-size: 1.4rem;
+  }
+}

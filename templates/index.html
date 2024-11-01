@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Sign Language Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <img src="static/images/logo2.jpg" alt="logo">
+        <h1>Sign Language App</h1>
+        <img src="static/images/logo.jpg" alt="logo">
+    </nav>
+    <div class="intro"></div>
+    <div class="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#detectBody">Sign Language Detector</a></li>
+            <li><a href="#footer">Footer</a></li>
+        </ul>
+    </div>
+    <div class="home" id="home">
+        <div>
+            <img src="static/images/download.jpg" alt="">
+        </div>
+        <div class="text">
+            <h2>Welcome to the Real-Time American Sign Language (ASL) Detection App!</h2>
+            <p>This application leverages advanced machine learning to recognize and interpret ASL signs from a live video feed. Simply point your webcam at your hand showing any ASL sign, and the app will detect and display the sign in real time.</p>
+            <p>We aim to make ASL learning and communication more accessible and interactive for everyone.</p>
+        </div>
+    </div>
+    <div class="home">
+        <div class="text">
+            <h2>Upload your sign language photos to our app!</h2>
+            <p>📸 Select a photo from your gallery or take a new one</p>
+            <p>🤖 Our AI-powered algorithm will process the image</p>
+            <p>💡 Get accurate predictions of the sign language gesture Improve communication, learn new signs, and bridge the gap with our sign language app!</p>
+            <p>🌎 Upload now and start exploring the world of sign language! 🎉</p>
+        </div>
+        <div>
+            <img src="static/images/download2.jpg" alt="">
+        </div>
+    </div>
+    <div class="navbar">
+        <h1>Sign Language Detector</h1>
+    </div>
+    <div class="detectBody" id="detectBody">
+      <h1>Video Stream</h1>
+      <img src="{{ url_for('video_feed') }}" alt="Video Stream">
+        </div>
+    </div>
+    <div class="footer" id="footer">
+        <div class="footer-img">
+            <img src="static/images/logo2.jpg" alt="">
+        </div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#detectBody">Sign Language Detector</a></li>
+            <li><a href="#footer">Footer</a></li>
+        </ul>
+        <div class="copyright">
+            <p>Copyright &copy; 2024</p>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const uploadImage = document.getElementById("uploadImage");
+        const imagePreview = document.getElementById("imagePreview");
+        const fileName = document.getElementById("fileName");
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const captureButton = document.getElementById("capture");
+        const capturedImageInput = document.getElementById("capturedImage");
+
+        // Handle file upload and preview
+        uploadImage.addEventListener("click", () => {
+            fileInput.click();
+        });
+        fileInput.addEventListener("change", (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                let selectedImage = URL.createObjectURL(selectedFile);
+                imagePreview.src = selectedImage;
+                fileName.innerText = `${selectedFile.name}`;
+            }
+        });
+
+        // Access the webcam
+        navigator.mediaDevices
+            .getUserMedia({ video: true })
+            .then(function (stream) {
+                video.srcObject = stream;
+            })
+            .catch(function (err) {
+                console.error("Error accessing the camera: ", err);
+            });
+
+        // Capture the image from the video stream
+        captureButton.addEventListener("click", function () {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext("2d").drawImage(video, 0, 0);
+            const dataUrl = canvas.toDataURL("image/jpeg");
+            capturedImageInput.value = dataUrl;
+            imagePreview.src = dataUrl;
+            fileName.innerText = "Captured Image";
+        });
+
+        // Handle form submission
+        document.getElementById("uploadForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData();
+
+            if (fileInput.files.length > 0) {
+                formData.append("file", fileInput.files[0]);
+            } else if (capturedImageInput.value) {
+                formData.append("file", dataURLtoBlob(capturedImageInput.value, "image/jpeg"));
+            } else {
+                document.getElementById("result").innerText = "Please select a file or capture an image.";
+                return;
+            }
+
+            fetch("/predict", {
+                method: "POST",
+                body: formData
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    document.getElementById("result").innerText = `Error: ${data.error}`;
+                } else {
+                    document.getElementById("result").innerText = `Prediction: ${data.prediction}`;
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+        });
+
+        // Utility function to convert data URL to Blob
+        function dataURLtoBlob(dataurl, mimeType) {
+            const arr = dataurl.split(",");
+            const mime = mimeType || arr[0].match(/:(.*?);/)[1];
+            const bstr = atob(arr[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], { type: mime });
+        }
+    </script>
+</body>
+</html>
