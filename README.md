@@ -1,5 +1,10 @@
-# Sign Language Recognition App
+# Sign Language Recognition App 
+
+![Capture](https://github.com/user-attachments/assets/5dab1d3f-dab6-4436-af58-bcb4698be6ac)
+
 This repository hosts the Sign Language Recognition App, a powerful tool designed to interpret and recognize sign language gestures. The app leverages machine learning to provide a seamless and efficient experience for users. Below, you will find detailed information about the app's structure, features, and usage.
+
+
 
 ## Key Features
 Real-time Gesture Recognition: Accurately identifies sign language gestures.
