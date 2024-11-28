@@ -112,6 +112,6 @@ This project is licensed under the MIT License. See the LICENSE file for more in
 For any inquiries or issues:
 
 Email: dukekongo16@example.com
-GitHub: https://github.com/poppatheduke
+GitHub: https://github.com/codejoetheduke
 
 # Enjoy using the Sign Language Recognition App!
